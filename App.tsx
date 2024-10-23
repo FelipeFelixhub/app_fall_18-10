@@ -13,10 +13,12 @@ export default function App() {
   useEffect(() => {
     const subscription = Accelerometer.addListener(accelerometerData => {
       if (Math.abs(accelerometerData.x) > 1.1 || 
-      Math.abs(accelerometerData.y)> 1.1 || 
-      Math.abs(accelerometerData.z) > 1.1) {
+            Math.abs(accelerometerData.y)> 1.1 || 
+            Math.abs(accelerometerData.z) > 1.1) {
+
         posicaoAtual();
-        setQuedas((quedas) => [...quedas, accelerometerData]);        
+        setQuedas((quedas) => 
+            [...quedas, accelerometerData]);        
       }
       setData(accelerometerData);
       
@@ -27,7 +29,9 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
+
       let { status } = await Location.requestForegroundPermissionsAsync();
+      
       if (status !== 'granted') {
         setErrorMsg('Permissão de localização negada');
         return;
